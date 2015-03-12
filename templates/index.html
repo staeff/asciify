@@ -13,7 +13,7 @@
     </div>
 
     {% for i in range(image_files_number) %}
-      <p> {{ i+1 }}) {{ image_files[i] }} </p>
+      <p> {{ i+1 }}) <a href="/asciify/{{ image_files[i] }}">{{ image_files[i] }}</a></p>
     {% endfor %}
   </div>
 {% endblock %}
