@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <h1>Upload new image</h1>
+    <div class="well">
+      <form action="" method="post" name="upload" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="post"></label>
+          <input type="file" name="file">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+
+    {% for i in range(image_files_number) %}
+      <p> {{ i+1 }}) {{ image_files[i] }} </p>
+    {% endfor %}
+  </div>
+{% endblock %}
