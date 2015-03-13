@@ -21,14 +21,13 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
-def upload_file():
+def index():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('index',
-                                    filename=filename))
+            return redirect(url_for('index'))
 
     image_files = [f for f in os.listdir(app.config['UPLOAD_FOLDER'])]
     image_files_number = len(image_files)
@@ -38,9 +37,14 @@ def upload_file():
                         image_files = image_files)
 
 @app.route('/asciify/<filename>')
-def uploaded_file(filename):
+def asciify_file(filename):
     img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return convert_image_to_ascii(img)
+
+@app.route('/show/<filename>')
+def show_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 def convert_image_to_ascii(img):
     ascii_html = '''<html><head><style>span.char {
@@ -72,4 +76,4 @@ def convert_image_to_ascii(img):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
