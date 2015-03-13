@@ -14,6 +14,12 @@ The app is build with flask
 
 * python app.py
 
+## Bugs and Problems
+
+* Filenames are checked literal, currently just lowercase. Make it work for different variation.
+* Is it possible to check for the actual file contents with something similar to the `file` command?
+* gifs give an error.
+
 ## Further ideas/ToDo
 
 * setup production deployment (gunicorn with apache or nginx)
@@ -22,3 +28,4 @@ The app is build with flask
 * save ascii art locally
 * copy ascii art to clipboard
 * users (save ascii art, bla und blubb)
+
